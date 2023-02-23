@@ -1,4 +1,4 @@
-# Creating 1st web subnet 
+# Create 1st web subnet 
 resource "aws_subnet" "public-subnet-1" {
   vpc_id                  = "${aws_vpc.rg_vpc.id}"
   cidr_block             = "${var.subnet1_cidr}"
@@ -8,7 +8,7 @@ tags = {
   Name = "Web Subnet 1"
 }
 }
-# Creating 2nd web subnet 
+# Create 2nd web subnet 
 resource "aws_subnet" "public-subnet-2" {
   vpc_id                  = "${aws_vpc.rg_vpc.id}"
   cidr_block             = "${var.subnet2_cidr}"
@@ -18,7 +18,7 @@ tags = {
   Name = "Web Subnet 2"
 }
 }
-# Creating 1st application subnet 
+# Create 1st application subnet 
 resource "aws_subnet" "application-subnet-1" {
   vpc_id                  = "${aws_vpc.rg_vpc.id}"
   cidr_block             = "${var.subnet3_cidr}"
@@ -28,7 +28,7 @@ tags = {
   Name = "Application Subnet 1"
 }
 }
-# Creating 2nd application subnet 
+# Create 2nd application subnet 
 resource "aws_subnet" "application-subnet-2" {
   vpc_id                  = "${aws_vpc.rg_vpc.id}"
   cidr_block             = "${var.subnet4_cidr}"
@@ -51,7 +51,7 @@ tags = {
 resource "aws_subnet" "database-subnet-2" {
   vpc_id            = "${aws_vpc.rg_vpc.id}"
   cidr_block        = "${var.subnet6_cidr}"
-  availability_zone = "us-east-1a"
+  availability_zone = "us-east-1b"
 tags = {
   Name = "Database Subnet 2"
 }
