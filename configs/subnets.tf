@@ -1,58 +1,56 @@
-# Create 1st web subnet 
+
 resource "aws_subnet" "public-subnet-1" {
-  vpc_id                  = "${aws_vpc.rg_vpc.id}"
-  cidr_block             = "${var.subnet1_cidr}"
+  vpc_id                  = aws_vpc.rg_vpc.id
+  cidr_block              = "10.0.1.0/24"
   map_public_ip_on_launch = true
-  availability_zone = "us-east-1a"
-tags = {
-  Name = "Web Subnet 1"
+  availability_zone       = var.availability_zone_1
+  tags = {
+    Name = "Web Subnet 1"
+  }
 }
-}
-# Create 2nd web subnet 
+
 resource "aws_subnet" "public-subnet-2" {
-  vpc_id                  = "${aws_vpc.rg_vpc.id}"
-  cidr_block             = "${var.subnet2_cidr}"
+  vpc_id                  = aws_vpc.rg_vpc.id
+  cidr_block              = "10.0.2.0/24"
   map_public_ip_on_launch = true
-  availability_zone = "us-east-1b"
-tags = {
-  Name = "Web Subnet 2"
+  availability_zone       = var.availability_zone_2
+  tags = {
+    Name = "Web Subnet 2"
+  }
 }
+
+resource "aws_subnet" "private-app-subnet-1" {
+  vpc_id                  = aws_vpc.rg_vpc.id
+  cidr_block              = "10.0.3.0/24"
+  availability_zone       = var.availability_zone_1
+  tags = {
+    Name = "Application Subnet 1"
+  }
 }
-# Create 1st application subnet 
-resource "aws_subnet" "application-subnet-1" {
-  vpc_id                  = "${aws_vpc.rg_vpc.id}"
-  cidr_block             = "${var.subnet3_cidr}"
-  map_public_ip_on_launch = false
-  availability_zone = "us-east-1a"
-tags = {
-  Name = "Application Subnet 1"
+
+resource "aws_subnet" "private-application-subnet-2" {
+  vpc_id                  = aws_vpc.rg_vpc.id
+  cidr_block              = "10.0.4.0/24"
+  availability_zone       = var.availability_zone_2
+  tags = {
+    Name = "Application Subnet 2"
+  }
 }
+
+resource "aws_subnet" "private-database-subnet-1" {
+  vpc_id            = aws_vpc.rg_vpc.id
+  cidr_block        = "10.0.5.0/24"
+  availability_zone = var.availability_zone_1
+  tags = {
+    Name = "Database Subnet 1"
+  }
 }
-# Create 2nd application subnet 
-resource "aws_subnet" "application-subnet-2" {
-  vpc_id                  = "${aws_vpc.rg_vpc.id}"
-  cidr_block             = "${var.subnet4_cidr}"
-  map_public_ip_on_launch = false
-  availability_zone = "us-east-1b"
-tags = {
-  Name = "Application Subnet 2"
-}
-}
-# Create Database Private Subnet
-resource "aws_subnet" "database-subnet-1" {
-  vpc_id            = "${aws_vpc.rg_vpc.id}"
-  cidr_block        = "${var.subnet5_cidr}"
-  availability_zone = "us-east-1a"
-tags = {
-  Name = "Database Subnet 1"
-}
-}
-# Create Database Private Subnet
-resource "aws_subnet" "database-subnet-2" {
-  vpc_id            = "${aws_vpc.rg_vpc.id}"
-  cidr_block        = "${var.subnet6_cidr}"
-  availability_zone = "us-east-1b"
-tags = {
-  Name = "Database Subnet 2"
-}
+
+resource "aws_subnet" "private-database-subnet-2" {
+  vpc_id            = aws_vpc.rg_vpc.id
+  cidr_block        = "10.0.6.0/24"
+  availability_zone = var.availability_zone_2
+  tags = {
+    Name = "Database Subnet 2"
+  }
 }

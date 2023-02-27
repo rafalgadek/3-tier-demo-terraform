@@ -1,0 +1,6 @@
+region = "us-east-1"
+ami = "ami-0c9978668f8d55984"
+instance_type = "t2.nano"
+env = "prod"
+availability_zone_1 = "us-east-1a"
+availability_zone_2 = "us-east-1b"

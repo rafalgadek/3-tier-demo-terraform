@@ -1,0 +1,6 @@
+region = "eu-central-1"
+ami = "ami-03f255060aa887525"
+instance_type = "t2.micro"
+env = "nonprod"
+availability_zone_1 = "eu-central-1a"
+availability_zone_2 = "eu-central-1b"
