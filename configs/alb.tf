@@ -4,26 +4,26 @@ resource "aws_lb" "alb" {
   internal           = false
   load_balancer_type = "application"
   security_groups    = [aws_security_group.alb_sg.id]
-  subnets            = [aws_subnet.public-subnet-1.id, aws_subnet.public-subnet-2.id]
+  subnets            = [aws_subnet.public_subnet_1.id, aws_subnet.public_subnet_2.id]
 }
 
-resource "aws_lb_target_group" "alb" {
-  name     = "alb-tg-${var.env}"
+resource "aws_lb_target_group" "web_servers_tg" {
+  name     = "web-servers-tg-${var.env}"
   port     = 80
   protocol = "HTTP"
   vpc_id   = aws_vpc.rg_vpc.id
 }
 
-resource "aws_lb_target_group_attachment" "alb1" {
-  target_group_arn = aws_lb_target_group.alb.arn
+resource "aws_lb_target_group_attachment" "az_1" {
+  target_group_arn = aws_lb_target_group.web_servers_tg.arn
   target_id        = aws_instance.web_instance_1.id
-  port             = 80
+  port             = var.app_listener_port
 }
 
-resource "aws_lb_target_group_attachment" "alb2" {
-  target_group_arn = aws_lb_target_group.alb.arn
+resource "aws_lb_target_group_attachment" "az_2" {
+  target_group_arn = aws_lb_target_group.web_servers_tg.arn
   target_id        = aws_instance.web_instance_2.id
-  port             = 80
+  port             = var.app_listener_port
 }
 
 resource "aws_lb_listener" "alb" {
@@ -33,6 +33,6 @@ resource "aws_lb_listener" "alb" {
 
   default_action {
     type             = "forward"
-    target_group_arn = aws_lb_target_group.alb.arn
+    target_group_arn = aws_lb_target_group.web_servers_tg.arn
   }
 }

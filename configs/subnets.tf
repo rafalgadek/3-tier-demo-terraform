@@ -1,46 +1,50 @@
 
-resource "aws_subnet" "public-subnet-1" {
+data "aws_availability_zones" "available" {
+  state = "available"
+}
+
+resource "aws_subnet" "public_subnet_1" {
   vpc_id                  = aws_vpc.rg_vpc.id
-  cidr_block              = "10.0.1.0/24"
+  cidr_block              = var.public_subnet_1_cidr
   map_public_ip_on_launch = true
-  availability_zone       = var.availability_zone_1
+  availability_zone       = data.aws_availability_zones.available.names[0]
   tags = {
     Name = "web_subnet_1"
   }
 }
 
-resource "aws_subnet" "public-subnet-2" {
+resource "aws_subnet" "public_subnet_2" {
   vpc_id                  = aws_vpc.rg_vpc.id
-  cidr_block              = "10.0.2.0/24"
+  cidr_block              = var.public_subnet_2_cidr
   map_public_ip_on_launch = true
-  availability_zone       = var.availability_zone_2
+  availability_zone       = data.aws_availability_zones.available.names[1]
   tags = {
     Name = "web_subnet_2"
   }
 }
 
-resource "aws_subnet" "private-app-subnet-1" {
-  vpc_id                  = aws_vpc.rg_vpc.id
-  cidr_block              = "10.0.3.0/24"
-  availability_zone       = var.availability_zone_1
+resource "aws_subnet" "private_app_subnet_1" {
+  vpc_id            = aws_vpc.rg_vpc.id
+  cidr_block        = var.private_app_subnet_1_cidr
+  availability_zone = data.aws_availability_zones.available.names[0]
   tags = {
     Name = "app_subnet_1"
   }
 }
 
-resource "aws_subnet" "private-application-subnet-2" {
-  vpc_id                  = aws_vpc.rg_vpc.id
-  cidr_block              = "10.0.4.0/24"
-  availability_zone       = var.availability_zone_2
+resource "aws_subnet" "private_app_subnet_2" {
+  vpc_id            = aws_vpc.rg_vpc.id
+  cidr_block        = var.private_app_subnet_2_cidr
+  availability_zone = data.aws_availability_zones.available.names[1]
   tags = {
     Name = "app_subnet_2"
   }
 }
 
-resource "aws_subnet" "private-database-subnet-1" {
+resource "aws_subnet" "private_database_subnet_1" {
   vpc_id            = aws_vpc.rg_vpc.id
-  cidr_block        = "10.0.5.0/24"
-  availability_zone = var.availability_zone_1
+  cidr_block        = var.private_database_subnet_1_cidr
+  availability_zone = data.aws_availability_zones.available.names[0]
   tags = {
     Name = "db_subnet_1"
   }
@@ -48,8 +52,8 @@ resource "aws_subnet" "private-database-subnet-1" {
 
 resource "aws_subnet" "private-database-subnet-2" {
   vpc_id            = aws_vpc.rg_vpc.id
-  cidr_block        = "10.0.6.0/24"
-  availability_zone = var.availability_zone_2
+  cidr_block        = var.private_database_subnet_2_cidr
+  availability_zone = data.aws_availability_zones.available.names[1]
   tags = {
     Name = "db_subnet_2"
   }
