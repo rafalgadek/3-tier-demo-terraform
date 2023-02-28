@@ -7,7 +7,7 @@ resource "aws_instance" "web_instance_1" {
   associate_public_ip_address = true
   user_data                   = file("../scripts/user_data.sh")
   tags = {
-    Name = "Web Instance 1"
+    Name = "web_instance_1"
   }
 }
 
@@ -19,6 +19,6 @@ resource "aws_instance" "web_instance_2" {
   associate_public_ip_address = true
   user_data                   = file("../scripts/user_data.sh")
   tags = {
-    Name = "Web Instance 2"
+    Name = "web_instance_2"
   }
 }

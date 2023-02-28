@@ -8,11 +8,11 @@ terraform {
     }
   }
 
-#   backend "s3" {
-#     bucket = "398090104120-root-tfstate"
-#     key    = "aws-account-398090104120/terraform.tfstate"
-#     region = "eu-central-1"
-#   }
+  backend "s3" {
+    bucket = "398090104120-root-tfstate"
+    key    = "aws-account-398090104120/terraform.tfstate"
+    region = "eu-central-1"
+  }
 
 }
 
@@ -27,6 +27,6 @@ provider "aws" {
 locals {
   tags = {
     Environment = "${var.env}"
-    Project     = "RG Demo"
+    Project     = "rg_demo"
   }
 }

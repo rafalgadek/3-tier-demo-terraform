@@ -7,7 +7,7 @@ resource "aws_route_table" "route" {
     gateway_id = aws_internet_gateway.rg_gateway.id
   }
   tags = {
-    Name = "Route to internet"
+    Name = "route_to_public_internet"
   }
 }
 

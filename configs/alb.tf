@@ -1,6 +1,6 @@
 
 resource "aws_lb" "alb" {
-  name               = "ALB-public-${var.env}"
+  name               = "alb-public-${var.env}"
   internal           = false
   load_balancer_type = "application"
   security_groups    = [aws_security_group.alb_sg.id]
@@ -8,7 +8,7 @@ resource "aws_lb" "alb" {
 }
 
 resource "aws_lb_target_group" "alb" {
-  name     = "ALB-TG-${var.env}"
+  name     = "alb-tg-${var.env}"
   port     = 80
   protocol = "HTTP"
   vpc_id   = aws_vpc.rg_vpc.id
