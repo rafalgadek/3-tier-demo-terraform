@@ -39,7 +39,7 @@ resource "aws_security_group_rule" "allow_trafic_from_web_sg" {
   description = "allow trafic from web sg to app servers"
 }
 
-resource "aws_security_group_rule" "allow_trafic_to_anywhere" {
+resource "aws_security_group_rule" "allow_trafic_out_off_app_sg" {
   type = "egress"
   from_port = "0"
   to_port = "0"

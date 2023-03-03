@@ -58,6 +58,17 @@ variable "private_database_subnet_2_cidr" {
   default = "10.0.6.0/24"
 }
 
+variable "db_name" {
+  type = string
+  default  = "terraform_test_db"
+
+}
+variable "db_password" {
+  type = string
+  default  = "<input your password>"
+}
+
+
 
 
 
