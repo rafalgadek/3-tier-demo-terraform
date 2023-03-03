@@ -40,7 +40,7 @@ resource "aws_security_group_rule" "allow_trafic_from_anywhere" {
   description = "allow trafic from anywhere to the load balancer"
 }
 
-resource "aws_security_group_rule" "allow_trafic_to_web_sg" {
+resource "aws_security_group_rule" "allow_trafic_to_anywhere" {
   type = "egress"
   from_port = "0"
   to_port = "0"

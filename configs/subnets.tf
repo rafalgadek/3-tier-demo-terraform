@@ -50,7 +50,7 @@ resource "aws_subnet" "private_database_subnet_1" {
   }
 }
 
-resource "aws_subnet" "private-database-subnet-2" {
+resource "aws_subnet" "private_database_subnet_2" {
   vpc_id            = aws_vpc.rg_vpc.id
   cidr_block        = var.private_database_subnet_2_cidr
   availability_zone = data.aws_availability_zones.available.names[1]

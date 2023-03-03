@@ -34,7 +34,7 @@ resource "aws_security_group_rule" "allow_trafic_from_web_sg" {
   from_port = "80"
   to_port = "80"
   protocol = "tcp"
-  cidr_blocks = [ "${var.public_subnet_1_cidr}", "${var.public_subnet_2_cidr}" ]
+  cidr_blocks = [ var.public_subnet_1_cidr, var.public_subnet_2_cidr ]
   security_group_id = aws_security_group.app_sg.id  
   description = "allow trafic from web sg to app servers"
 }
