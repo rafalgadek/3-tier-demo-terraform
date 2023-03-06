@@ -8,11 +8,11 @@ terraform {
     }
   }
 
-    backend "s3" {
-      bucket = "398090104120-root-tfstate"
-      key    = "aws-account-398090104120/terraform.tfstate"
-      region = "eu-central-1"
-    }
+  backend "s3" {
+    bucket = "398090104120-root-tfstate"
+    key    = "aws-account-398090104120/terraform.tfstate"
+    region = "eu-central-1"
+  }
 
 }
 

@@ -4,7 +4,7 @@ resource "aws_lb" "alb" {
   internal           = false
   load_balancer_type = "application"
   security_groups    = [aws_security_group.alb_sg.id]
-  subnets            = [aws_subnet.public_subnet_1.id, aws_subnet.public_subnet_2.id]
+  subnets            = [aws_subnet.public_subnet[0].id, aws_subnet.public_subnet[1].id]
 }
 
 resource "aws_lb_listener" "alb" {
@@ -45,20 +45,20 @@ resource "aws_security_group" "alb_sg" {
 }
 
 resource "aws_security_group_rule" "allow_trafic_from_alb" {
-  type = "ingress"
-  from_port = var.app_listener_port
-  to_port = var.app_listener_port
-  protocol = "tcp"
+  type                     = "ingress"
+  from_port                = var.app_listener_port
+  to_port                  = var.app_listener_port
+  protocol                 = "tcp"
   source_security_group_id = aws_security_group.alb_sg.id
-  security_group_id = aws_security_group.web_sg.id  
+  security_group_id        = aws_security_group.web_sg.id
 }
 
 resource "aws_security_group_rule" "allow_trafic_to_alb_sg" {
-  type = "egress"
-  from_port = "0"
-  to_port = "0"
-  protocol = "-1"
-  cidr_blocks = [ "0.0.0.0/0" ]
+  type              = "egress"
+  from_port         = "0"
+  to_port           = "0"
+  protocol          = "-1"
+  cidr_blocks       = ["0.0.0.0/0"]
   security_group_id = aws_security_group.alb_sg.id
 }
 
