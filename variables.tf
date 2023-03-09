@@ -55,7 +55,7 @@ variable "db_name" {
 }
 variable "db_password" {
   type    = string
-  default = "<input your password>"
+  default = "yourpassword"
 }
 
 

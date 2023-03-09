@@ -7,7 +7,7 @@ resource "aws_db_instance" "rds_db" {
   allocated_storage      = 5
   db_subnet_group_name   = aws_db_subnet_group.db_subnet_group.id
   engine                 = "mysql"
-  engine_version         = "5.6.35"
+  engine_version         = "5.7"
   instance_class         = "db.t2.micro"
   db_name                = var.db_name
   username               = var.db_name
@@ -32,13 +32,13 @@ resource "aws_security_group_rule" "allow_trafic_from_app_sg" {
   description       = "allow trafic from app sg to database"
 }
 
-resource "aws_security_group_rule" "allow_trafic_out_off_rds_sg" {
+resource "aws_security_group_rule" "allow_trafic_out_from_rds_sg" {
   type              = "egress"
   from_port         = "0"
   to_port           = "0"
   protocol          = "-1"
   cidr_blocks       = ["0.0.0.0/0"]
-  security_group_id = aws_db_instance.rds_db.id
+  security_group_id = aws_security_group.rds_sg.id
   description       = "allow trafic from rd sg to anywhere"
 
 }

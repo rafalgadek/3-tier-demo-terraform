@@ -46,7 +46,7 @@ resource "aws_nat_gateway" "nat_gateway" {
   }
 }
 
-resource "aws_route_table" "nat_gateway" {
+resource "aws_route_table" "nat_gateway_rt" {
   vpc_id = aws_vpc.rg_vpc.id
   tags = {
     "Name" = "nat_gateway_rt"
@@ -54,17 +54,17 @@ resource "aws_route_table" "nat_gateway" {
 }
 
 resource "aws_route" "nat_gateway" {
-  route_table_id         = aws_route_table.nat_gateway.id
+  route_table_id         = aws_route_table.nat_gateway_rt.id
   destination_cidr_block = "0.0.0.0/0"
   gateway_id             = aws_nat_gateway.nat_gateway.id
 }
 
 resource "aws_route_table_association" "nat_gateway_1" {
   subnet_id      = aws_subnet.private_subnet[0].id
-  route_table_id = aws_route.nat_gateway.id
+  route_table_id = aws_route_table.nat_gateway_rt.id
 }
 
 resource "aws_route_table_association" "nat_gateway_2" {
   subnet_id      = aws_subnet.private_subnet[1].id
-  route_table_id = aws_route.nat_gateway.id
+  route_table_id = aws_route_table.nat_gateway_rt.id
 }
