@@ -1,26 +1,16 @@
-resource "aws_instance" "app_instance_1" {
+resource "aws_instance" "app_instance" {
+  count = 2
   ami                         = var.ami
   instance_type               = var.instance_type
   vpc_security_group_ids      = [aws_security_group.app_sg.id]
-  subnet_id                   = aws_subnet.private_subnet[0].id
+  subnet_id                   = aws_subnet.private_subnet[count.index].id
   associate_public_ip_address = true
   user_data                   = file("scripts/user_data.sh")
   tags = {
-    Name = "app_instance_1"
+    Name = "app_instance_${count.index}"
   }
 }
 
-resource "aws_instance" "app_instance_2" {
-  ami                         = var.ami
-  instance_type               = var.instance_type
-  vpc_security_group_ids      = [aws_security_group.app_sg.id]
-  subnet_id                   = aws_subnet.private_subnet[1].id
-  associate_public_ip_address = true
-  user_data                   = file("scripts/user_data.sh")
-  tags = {
-    Name = "app_instance_2"
-  }
-}
 
 resource "aws_security_group" "app_sg" {
   vpc_id = aws_vpc.rg_vpc.id

@@ -13,6 +13,7 @@ resource "aws_db_instance" "rds_db" {
   username               = var.db_name
   password               = var.db_password
   vpc_security_group_ids = [aws_security_group.rds_sg.id]
+  skip_final_snapshot    = true
 }
 
 resource "aws_security_group" "rds_sg" {

@@ -25,17 +25,13 @@ resource "aws_lb_target_group" "web_servers_tg" {
   vpc_id   = aws_vpc.rg_vpc.id
 }
 
-resource "aws_lb_target_group_attachment" "az_1" {
+resource "aws_lb_target_group_attachment" "az_tg" {
+  count = 2
+  target_id        = aws_instance.web_instance[count.index].id
   target_group_arn = aws_lb_target_group.web_servers_tg.arn
-  target_id        = aws_instance.web_instance_1.id
   port             = var.app_listener_port
 }
 
-resource "aws_lb_target_group_attachment" "az_2" {
-  target_group_arn = aws_lb_target_group.web_servers_tg.arn
-  target_id        = aws_instance.web_instance_2.id
-  port             = var.app_listener_port
-}
 
 resource "aws_security_group" "alb_sg" {
   vpc_id = aws_vpc.rg_vpc.id
