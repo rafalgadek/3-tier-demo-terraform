@@ -32,7 +32,6 @@ resource "aws_lb_target_group_attachment" "az_tg" {
   port             = var.web_listener_port
 }
 
-
 resource "aws_security_group" "alb_sg" {
   vpc_id = aws_vpc.rg_vpc.id
   tags = {

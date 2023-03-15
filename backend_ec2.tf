@@ -11,7 +11,6 @@ resource "aws_instance" "app_instance" {
   }
 }
 
-
 resource "aws_security_group" "app_sg" {
   vpc_id = aws_vpc.rg_vpc.id
   tags = {
@@ -37,10 +36,9 @@ resource "aws_security_group_rule" "allow_trafic_ssh_from_web_sg" {
   source_security_group_id = aws_security_group.web_sg.id
   security_group_id = aws_security_group.app_sg.id
   description       = "allow ssh from web_sg"
-
 }
 
-resource "aws_security_group_rule" "allow_trafic_out_off_app_sg" {
+resource "aws_security_group_rule" "allow_trafic_from_app_sg" {
   type              = "egress"
   from_port         = "0"
   to_port           = "0"

@@ -23,12 +23,12 @@ resource "aws_security_group" "rds_sg" {
   }
 }
 
-resource "aws_security_group_rule" "allow_trafic_from_app_sg" {
+resource "aws_security_group_rule" "allow_trafic_to_db" {
   type              = "ingress"
   from_port         = "3306"
   to_port           = "3306"
   protocol          = "tcp"
-  cidr_blocks       = [var.private_subnet_cidrs[0], var.private_subnet_cidrs[1]]
+  source_security_group_id = aws_security_group.app_sg.id
   security_group_id = aws_security_group.rds_sg.id
   description       = "allow trafic from app sg to database"
 }
@@ -40,6 +40,6 @@ resource "aws_security_group_rule" "allow_trafic_out_from_rds_sg" {
   protocol          = "-1"
   cidr_blocks       = ["0.0.0.0/0"]
   security_group_id = aws_security_group.rds_sg.id
-  description       = "allow trafic from rd sg to anywhere"
+  description       = "allow trafic from rds sg to anywhere"
 
 }
