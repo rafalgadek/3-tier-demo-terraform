@@ -18,7 +18,7 @@ variable "instance_type" {
   default = "t2.micro"
 }
 
-variable "app_listener_port" {
+variable "web_listener_port" {
   type    = number
   default = 80
 }
